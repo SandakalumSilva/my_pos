@@ -14,7 +14,26 @@ class PosController extends Controller
         $this->posRepository = $posRepository;
     }
 
-    public function pos(){
+    public function pos()
+    {
         return $this->posRepository->pos();
+    }
+
+    public function addCart(Request $request)
+    {
+        return $this->posRepository->addCart($request);
+    }
+
+    public function allItem()
+    {
+        return $this->posRepository->allItem();
+    }
+
+    public function cartUpdate(Request $request,$id){
+        return $this->posRepository->cartUpdate($request,$id);
+    }
+
+    public function cartRemove($id){
+        return $this->posRepository->cartRemove($id);
     }
 }
