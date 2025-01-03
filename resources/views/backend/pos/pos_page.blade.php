@@ -42,11 +42,11 @@
                                         </tr>
                                     </thead>
 
-                                    {{-- @php
+                                    @php
                                         $allcart = Cart::content();
-                                    @endphp --}}
+                                    @endphp
                                     <tbody>
-                                        {{-- @foreach ($allcart as $cart)
+                                        @foreach ($allcart as $cart)
                                             <tr>
                                                 <td>{{ $cart->name }}</td>
                                                 <td>
@@ -66,13 +66,13 @@
                                                 <td> <a href="{{ url('/cart-remove/' . $cart->rowId) }}"><i
                                                             class="fas fa-trash-alt" style="color:#ffffff"></i></a> </td>
                                             </tr>
-                                        @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
 
 
-                            {{-- <div class="bg-primary">
+                            <div class="bg-primary">
                                 <br>
                                 <p style="font-size:18px; color:#fff"> Quantity : {{ Cart::count() }} </p>
                                 <p style="font-size:18px; color:#fff"> SubTotal : {{ Cart::subtotal() }} </p>
@@ -82,7 +82,7 @@
                                 <h1 class="text-white"> {{ Cart::total() }}</h1>
                                 </p>
                                 <br>
-                            </div> --}}
+                            </div>
 
                             <br>
                             <form id="myForm" method="post" action="{{ url('/create-invoice') }}">
@@ -148,7 +148,8 @@
                                                     <input type="hidden" name="id" value="{{ $item->id }}">
                                                     <input type="hidden" name="name" value="{{ $item->product_name }}">
                                                     <input type="hidden" name="qty" value="1">
-                                                    <input type="hidden" name="price" value="{{ $item->selling_price }}">
+                                                    <input type="hidden" name="price"
+                                                        value="{{ $item->selling_price }}">
 
                                                     <td>{{ $key + 1 }}</td>
                                                     <td> <img src="{{ asset($item->product_image) }}"
