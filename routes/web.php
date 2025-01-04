@@ -6,8 +6,10 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\EmployeeController;
 use App\Http\Controllers\Backend\ExpenseController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PosController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SalaryController;
 use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\ProfileController;
@@ -138,5 +140,27 @@ Route::controller(PosController::class)->group(function () {
     Route::post('add-cart', 'addCart');
     Route::get('/allitem', 'allItem');
     Route::post('/cart-update/{id}', 'cartUpdate');
-    Route::get('/cart-remove/{id}','cartRemove');
+    Route::get('/cart-remove/{id}', 'cartRemove');
+    Route::post('create-invoice', 'createInvoice');
+});
+
+///All Order Routes
+Route::controller(OrderController::class)->group(function () {
+    Route::post('/final-invoice', 'finalInvoice');
+    Route::get('/pending/order', 'pendingOrder')->name('pending.order');
+    Route::get('/order/details/{id}', 'orderDetails')->name('order.details');
+    Route::post('/order/status/update', 'orderStatusUpdate')->name('order.status.update');
+    Route::get('/complete/order', 'completeOrder')->name('complete.order');
+    Route::get('/stock', 'stockManage')->name('stock.manage');
+    Route::get('order/invoice-download/{id}', 'orderInvoice');
+});
+
+///All Role Routes
+Route::controller(RoleController::class)->group(function () {
+    Route::get('/all/permission', 'allPermission')->name('all.permission');
+    Route::get('/add/permission', 'addPermission')->name('add.permission');
+    Route::post('/store/permission','storePermission')->name('permission.store');
+    Route::get('/edit/permission/{id}','editPermission')->name('edit.permission');
+    Route::post('/update/permission','updatePermission')->name('permission.update');
+    Route::get('/delete/permission/{id}','deletePermission')->name('delete.permission');
 });

@@ -8,4 +8,5 @@ interface PosInterface{
     public function allItem();
     public function cartUpdate($request,$id);
     public function cartRemove($id);
+    public function createInvoice($request);
 }

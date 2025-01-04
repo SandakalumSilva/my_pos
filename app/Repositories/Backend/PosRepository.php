@@ -58,12 +58,20 @@ class PosRepository implements PosInterface
     public function cartRemove($id)
     {
         Cart::remove($id);
-        
+
         $notification = array(
             'message' => 'Cart Item Removed Successfully',
             'alert-type' => 'success'
         );
 
         return redirect()->back()->with($notification);
+    }
+
+    public function createInvoice($request)
+    {
+        $contents = Cart::content();
+        $cust_id = $request->customer_id;
+        $customer = Customer::where('id', $cust_id)->first();
+        return view('backend.invoice.product_invoice', compact('contents', 'customer'));
     }
 }

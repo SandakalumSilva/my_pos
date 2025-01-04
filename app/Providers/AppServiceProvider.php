@@ -8,8 +8,10 @@ use App\Interfaces\Backend\CategoryInterface;
 use App\Interfaces\Backend\CustomerInterface;
 use App\Interfaces\Backend\EmployeeInterface;
 use App\Interfaces\Backend\ExpenseInterface;
+use App\Interfaces\Backend\OrderInterface;
 use App\Interfaces\Backend\PosInterface;
 use App\Interfaces\Backend\ProductInterface;
+use App\Interfaces\Backend\RoleInterface;
 use App\Interfaces\Backend\SalaryInterface;
 use App\Interfaces\Backend\SupplierInterface;
 use App\Repositories\AdminRepository;
@@ -18,8 +20,10 @@ use App\Repositories\Backend\CategoryRepository;
 use App\Repositories\Backend\CustomerRepository;
 use App\Repositories\Backend\EmployeeRepository;
 use App\Repositories\Backend\ExpenseRepository;
+use App\Repositories\Backend\OrderRepository;
 use App\Repositories\Backend\PosRepository;
 use App\Repositories\Backend\ProductRepository;
+use App\Repositories\Backend\RoleRepository;
 use App\Repositories\Backend\SalaryRepository;
 use App\Repositories\Backend\SupplierRepository;
 use Illuminate\Support\ServiceProvider;
@@ -40,7 +44,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CategoryInterface::class, CategoryRepository::class);
         $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(ExpenseInterface::class, ExpenseRepository::class);
-        $this->app->bind(PosInterface::class,PosRepository::class);
+        $this->app->bind(PosInterface::class, PosRepository::class);
+        $this->app->bind(OrderInterface::class, OrderRepository::class);
+        $this->app->bind(RoleInterface::class, RoleRepository::class);
     }
 
     /**

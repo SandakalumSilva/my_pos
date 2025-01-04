@@ -141,7 +141,7 @@
                 <li>
                     <a href="#product" data-bs-toggle="collapse">
                         <i class="mdi mdi-email-multiple-outline"></i>
-                        <span> Product</span>
+                        <span> Products</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="product">
@@ -154,6 +154,54 @@
                             </li>
                             <li>
                                 <a href="{{ route('import.product') }}">Import Product</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#orders" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-multiple-outline"></i>
+                        <span> Orders </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="orders">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('pending.order') }}">Pending Orders</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('complete.order') }}">Complete Orders</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#stock" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-multiple-outline"></i>
+                        <span> Stock Manage </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="stock">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('stock.manage') }}">Stock</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#permisssion" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-multiple-outline"></i>
+                        <span> Role & Permission </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="permisssion">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.permission') }}">All Permission</a>
                             </li>
                         </ul>
                     </div>
