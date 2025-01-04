@@ -87,7 +87,6 @@
                             <br>
                             <form id="myForm" method="post" action="{{ url('/create-invoice') }}">
                                 @csrf
-
                                 <div class="form-group mb-3">
                                     <label for="firstname" class="form-label">All Customer </label>
 

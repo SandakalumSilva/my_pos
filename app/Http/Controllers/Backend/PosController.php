@@ -32,8 +32,11 @@ class PosController extends Controller
     public function cartUpdate(Request $request,$id){
         return $this->posRepository->cartUpdate($request,$id);
     }
-
     public function cartRemove($id){
         return $this->posRepository->cartRemove($id);
+    }
+
+    public function createInvoice(Request $request){
+        return $this->posRepository->createInvoice($request);
     }
 }
