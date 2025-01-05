@@ -17,14 +17,15 @@
                         <span> Dashboards </span>
                     </a>
                 </li>
-
-                <li>
-                    <a href="{{ route('pos') }}">
-                        <span class="badge bg-pink float-end">Hot</span>
-                        <i class="mdi mdi-view-dashboard-outline"></i>
-                        <span> POS </span>
-                    </a>
-                </li>
+                @if (Auth::user()->can('pos.menu'))
+                    <li>
+                        <a href="{{ route('pos') }}">
+                            <span class="badge bg-pink float-end">Hot</span>
+                            <i class="mdi mdi-view-dashboard-outline"></i>
+                            <span> POS </span>
+                        </a>
+                    </li>
+                @endif
 
                 <li class="menu-title mt-2">Apps</li>
 
@@ -202,6 +203,33 @@
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('all.permission') }}">All Permission</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('all.roles') }}">All Roles</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.roles.permission') }}">Roles in Permission</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('all.roles.permission') }}">All Roles in Permission</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#admin" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-multiple-outline"></i>
+                        <span> Setting Admin User </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="admin">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.admin') }}">All Admin</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('add.admin') }}">Add Admin</a>
                             </li>
                         </ul>
                     </div>

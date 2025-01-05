@@ -45,4 +45,28 @@ class AdminController extends Controller
     {
         return $this->adminRepository->updatePassword($request);
     }
+
+    public function allAdmin(){
+        return $this->adminRepository->allAdmin();
+    }
+
+    public function addAdmin(){
+        return $this->adminRepository->addAdmin();
+    }
+
+    public function storeAdmin(Request $request){
+        return $this->adminRepository->storeAdmin($request);
+    }
+
+    public function editAdmin($id){
+        return $this->adminRepository->editAdmin($id);
+    }
+
+    public function updateUser(Request $request){
+        return $this->adminRepository->updateUser($request);
+    }
+
+    public function deleteUser($id){
+        return $this->adminRepository->deleteUser($id);
+    }
 }
