@@ -6,6 +6,7 @@ use App\Interfaces\AdminInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AdminRepository implements AdminInterface
 {
@@ -100,5 +101,84 @@ class AdminRepository implements AdminInterface
         );
 
         return redirect()->back()->with($notification);
+    }
+
+    ///// Admin User all method /////
+    public function allAdmin()
+    {
+        $alladminuser = User::latest()->get();
+        return view('backend.admin.all_admin', compact('alladminuser'));
+    }
+
+    public function addAdmin()
+    {
+        $roles = Role::all();
+        return view('backend.admin.add_admin', compact('roles'));
+    }
+
+    public function storeAdmin($request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+
+        $notification = array(
+            'message' => 'New User Created Successfully.',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.admin')->with($notification);
+    }
+
+    public function editAdmin($id)
+    {
+        $roles = Role::all();
+        $adminuser = User::findOrFail($id);
+        return view('backend.admin.edit_admin', compact('roles', 'adminuser'));
+    }
+
+    public function updateUser($request)
+    {
+        $userId = $request->id;
+        $user = User::findOrFail($userId);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->save();
+
+        $user->roles()->detach();
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+
+        $notification = array(
+            'message' => 'User Updated Successfully.',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.admin')->with($notification);
+    }
+
+    public function deleteUser($id)
+    {
+
+        $user = User::findOrFail($id);
+        if (!is_null($user)) {
+            $user->delete();
+        }
+
+        $notification = array(
+            'message' => 'User Deleted Successfully.',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.admin')->with($notification);
     }
 }

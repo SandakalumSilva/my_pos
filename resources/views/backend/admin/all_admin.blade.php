@@ -11,11 +11,11 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('add.roles.permission') }}"
-                                    class="btn btn-primary rounded-pill waves-effect waves-light">Add Role in Permission </a>
+                                <a href="{{ route('add.admin') }}"
+                                    class="btn btn-primary rounded-pill waves-effect waves-light">Add Admin </a>
                             </ol>
                         </div>
-                        <h4 class="page-title">All Roles Permission</h4>
+                        <h4 class="page-title">All Admin <span class="btn btn-danger">{{ count($alladminuser) }}</span> </h4>
                     </div>
                 </div>
             </div>
@@ -27,32 +27,39 @@
                         <div class="card-body">
 
 
-                            <table class="table dt-responsive nowrap w-100">
+                            <table id="basic-datatable" class="table dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>Sl</th>
-                                        <th>Roles Name </th>
-                                        <th>Permission Name </th>
-                                        <th width="18%">Action</th>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Role</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
 
                                 <tbody>
-                                    @foreach ($roles as $key => $item)
+                                    @foreach ($alladminuser as $key => $item)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
+                                            <td> <img
+                                                    src="{{ !empty($item->photo) ? url('upload/admin_image/' . $item->photo) : url('upload/no_image.jpg') }}"
+                                                    style="width:50px; height: 40px;"> </td>
                                             <td>{{ $item->name }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $item->phone }}</td>
                                             <td>
-                                                @foreach ($item->permissions as $perm)
-                                                    <span class="badge rounded-pill bg-danger"> {{ $perm->name }} </span>
+                                                @foreach ($item->roles as $role)
+                                                    <span class="badge badge-pill bg-danger"> {{ $role->name }} </span>
                                                 @endforeach
-
                                             </td>
-                                            <td width="18%">
-                                                <a href="{{ route('admin.edit.roles', $item->id) }}"
+                                            <td>
+                                                <a href="{{ route('edit.admin', $item->id) }}"
                                                     class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                                <a href="{{ route('admin.delete.roles', $item->id) }}"
+                                                <a href="{{ route('delete.user', $item->id) }}"
                                                     class="btn btn-danger rounded-pill waves-effect waves-light"
                                                     id="delete">Delete</a>
 

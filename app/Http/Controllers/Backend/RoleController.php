@@ -40,7 +40,67 @@ class RoleController extends Controller
         return $this->roleRepository->updatePermission($request);
     }
 
-    public function deletePermission($id){
+    public function deletePermission($id)
+    {
         return $this->roleRepository->deletePermission($id);
+    }
+
+    public function allRoles()
+    {
+        return $this->roleRepository->allRoles();
+    }
+
+    public function addRoles()
+    {
+        return $this->roleRepository->addRoles();
+    }
+
+    public function storeRoles(Request $request)
+    {
+        return $this->roleRepository->storeRoles($request);
+    }
+
+    public function editRoles($id)
+    {
+        return $this->roleRepository->editRoles($id);
+    }
+
+    public function updateRoles(Request $request)
+    {
+        return $this->roleRepository->updateRoles($request);
+    }
+
+    public function deleteRole($id)
+    {
+        return $this->roleRepository->deleteRole($id);
+    }
+
+    public function addRolesPermission()
+    {
+        return $this->roleRepository->addRolesPermission();
+    }
+
+    public function storeRolePermission(Request $request)
+    {
+        return $this->roleRepository->storeRolePermission($request);
+    }
+
+    public function allRolePermission()
+    {
+        return $this->roleRepository->allRolePermission();
+    }
+
+    public function adminEditRoles($id)
+    {
+        return $this->roleRepository->adminEditRoles($id);
+    }
+
+    public function rolePermissionUpdate(Request $request, $id)
+    {
+        return $this->roleRepository->rolePermissionUpdate($request, $id);
+    }
+
+    public function adminDeleteRoles($id){
+        return $this->roleRepository->adminDeleteRoles($id);
     }
 }
