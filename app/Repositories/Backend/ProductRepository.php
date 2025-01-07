@@ -20,7 +20,6 @@ class ProductRepository implements ProductInterface
     public function allProduct()
     {
         $products = Product::latest()->get();
-        // dd($products);
         return view('backend.product.all_product', compact('products'));
     }
 
@@ -33,6 +32,18 @@ class ProductRepository implements ProductInterface
 
     public function storeProduct($request)
     {
+
+        $validate = $request->validate([
+            'product_name' => 'required',
+            'category_id' => 'required',
+            'supplier_id' => 'required',
+            'product_garage' => 'required',
+            'product_store' => 'required',
+            'buying_date' => 'required',
+            'buying_price' => 'required',
+            'selling_price' => 'required'
+        ]);
+
         $pcode = IdGenerator::generate(['table' => 'products', 'field' => 'product_code', 'length' => 4, 'prefix' => 'PC']);
 
         $manager = new ImageManager(new Driver());
@@ -56,7 +67,6 @@ class ProductRepository implements ProductInterface
             'product_garage' => $request->product_garage,
             'product_store' => $request->product_store,
             'buying_date' => $request->buying_date,
-            'expire_date' => $request->expire_date,
             'buying_price' => $request->buying_price,
             'selling_price' => $request->selling_price,
             'product_image' => $saveUrl,
@@ -81,6 +91,16 @@ class ProductRepository implements ProductInterface
 
     public function updateProduct($request)
     {
+        $validate = $request->validate([
+            'product_name' => 'required',
+            'category_id' => 'required',
+            'supplier_id' => 'required',
+            'product_garage' => 'required',
+            'product_store' => 'required',
+            'buying_date' => 'required',
+            'buying_price' => 'required',
+            'selling_price' => 'required'
+        ]);
 
         $productId = $request->id;
 
@@ -102,7 +122,6 @@ class ProductRepository implements ProductInterface
                 'product_garage' => $request->product_garage,
                 'product_store' => $request->product_store,
                 'buying_date' => $request->buying_date,
-                'expire_date' => $request->expire_date,
                 'buying_price' => $request->buying_price,
                 'selling_price' => $request->selling_price,
                 'product_image' => $saveUrl,
@@ -117,7 +136,6 @@ class ProductRepository implements ProductInterface
                 'product_garage' => $request->product_garage,
                 'product_store' => $request->product_store,
                 'buying_date' => $request->buying_date,
-                'expire_date' => $request->expire_date,
                 'buying_price' => $request->buying_price,
                 'selling_price' => $request->selling_price,
                 'updated_at' => Carbon::now(),
@@ -165,6 +183,7 @@ class ProductRepository implements ProductInterface
 
     public function import($request)
     {
+        $validate = $request->validate(['import_file' => 'required']);
         Excel::import(new ProductImport, $request->file('import_file'));
 
         $notification = array(

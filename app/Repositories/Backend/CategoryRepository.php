@@ -5,6 +5,7 @@ namespace App\Repositories\Backend;
 use App\Interfaces\Backend\CategoryInterface;
 use App\Models\Category;
 use Illuminate\Support\Carbon;
+use PhpOffice\PhpSpreadsheet\Worksheet\Validations;
 
 class CategoryRepository implements CategoryInterface
 {
@@ -17,6 +18,10 @@ class CategoryRepository implements CategoryInterface
 
     public function storeCategory($request)
     {
+        $validated = $request->validate([
+            'category_name' => 'required'
+        ]);
+
         Category::create([
             'category_name' => $request->category_name,
             'created_at' => Carbon::now(),

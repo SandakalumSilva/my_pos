@@ -24,6 +24,10 @@ class RoleRepository implements RoleInterface
 
     public function storePermission($request)
     {
+        $validate = $request->validate([
+            'name' => 'required',
+            'group_name' => 'required'
+        ]);
         $role = Permission::create([
             'name' => $request->name,
             'group_name' => $request->group_name
@@ -86,6 +90,9 @@ class RoleRepository implements RoleInterface
 
     public function storeRoles($request)
     {
+        $validate = $request->validate([
+            'name' => 'required'
+        ]);
         $role = Role::create([
             'name' => $request->name
         ]);
@@ -147,6 +154,7 @@ class RoleRepository implements RoleInterface
 
     public function storeRolePermission($request)
     {
+        $validate = $request->validate(['permission' => 'required']);
         $data = array();
         $permissions = $request->permission;
 

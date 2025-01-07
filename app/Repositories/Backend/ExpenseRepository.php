@@ -16,6 +16,10 @@ class ExpenseRepository implements ExpenseInterface
 
     public function storeExpense($request)
     {
+        $validate = $request->validate([
+            'details' => 'required',
+            'amount' => 'required'
+        ]);
         Expense::insert([
             'details' => $request->details,
             'amount' => $request->amount,
@@ -49,6 +53,11 @@ class ExpenseRepository implements ExpenseInterface
 
     public function updateExpense($request)
     {
+        $validate = $request->validate([
+            'details' => 'required',
+            'amount' => 'required'
+        ]);
+
         $expenseId = $request->id;
         Expense::findOrFail($expenseId)->update([
             'details' => $request->details,

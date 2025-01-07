@@ -183,8 +183,6 @@
                                 <option selected disabled>Select Payment </option>
 
                                 <option value="HandCash">HandCash</option>
-                                <option value="Cheque">Cheque</option>
-                                <option value="Due">Due</option>
 
                             </select>
                         </div>
