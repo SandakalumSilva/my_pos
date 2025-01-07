@@ -29,19 +29,38 @@ class OrderController extends Controller
         return $this->orderRepository->orderDetails($id);
     }
 
-    public function orderStatusUpdate(Request $request){
+    public function orderStatusUpdate(Request $request)
+    {
         return $this->orderRepository->orderStatusUpdate($request);
     }
 
-    public function completeOrder(){
+    public function completeOrder()
+    {
         return $this->orderRepository->completeOrder();
     }
 
-    public function stockManage(){
+    public function stockManage()
+    {
         return $this->orderRepository->stockManage();
     }
 
-    public function orderInvoice($id){
+    public function orderInvoice($id)
+    {
         return $this->orderRepository->orderInvoice($id);
+    }
+
+    public function pendingDue()
+    {
+        return $this->orderRepository->pendingDue();
+    }
+
+    public function orderDueAjax($id)
+    {
+        return $this->orderRepository->orderDueAjax($id);
+    }
+
+    public function updateDue(Request $request)
+    {
+        return $this->orderRepository->updateDue($request);
     }
 }

@@ -155,7 +155,7 @@ Route::controller(ExpenseController::class)->group(function () {
 ///All POS Route
 Route::controller(PosController::class)->group(function () {
     Route::middleware(['auth'])->group(function () {
-        Route::get('/pos', 'pos')->name('pos')->middleware('permission:pos.menu');
+        Route::get('/pos', 'pos')->name('pos');
         Route::post('add-cart', 'addCart');
         Route::get('/allitem', 'allItem');
         Route::post('/cart-update/{id}', 'cartUpdate');
@@ -174,6 +174,10 @@ Route::controller(OrderController::class)->group(function () {
         Route::get('/complete/order', 'completeOrder')->name('complete.order');
         Route::get('/stock', 'stockManage')->name('stock.manage');
         Route::get('order/invoice-download/{id}', 'orderInvoice');
+
+        Route::get('/pending/due', 'pendingDue')->name('pending.due');
+        Route::get('order/due/{id}', 'orderDueAjax');
+        Route::post('/update/due', 'updateDue')->name('update.due');
     });
 });
 

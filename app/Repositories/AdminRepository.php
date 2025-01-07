@@ -118,6 +118,12 @@ class AdminRepository implements AdminInterface
 
     public function storeAdmin($request)
     {
+        $validate = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'password' => 'required'
+        ]);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -146,6 +152,13 @@ class AdminRepository implements AdminInterface
 
     public function updateUser($request)
     {
+        $validate = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'password' => 'required'
+        ]);
+
         $userId = $request->id;
         $user = User::findOrFail($userId);
         $user->name = $request->name;

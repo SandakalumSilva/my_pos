@@ -30,8 +30,6 @@ class CustomerRepository implements CustomerInterface
             'email' => ['required', 'unique:customers', 'max:200'],
             'phone' => ['required', 'max:200'],
             'address' => ['required', 'max:400'],
-            'account_holder' => ['required', 'max:200'],
-            'account_number' => ['required', 'max:200']
         ]);
 
         $manager = new ImageManager(new Driver());
@@ -54,12 +52,6 @@ class CustomerRepository implements CustomerInterface
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
-            'shopname' => $request->shopname,
-            'account_holder' => $request->account_holder,
-            'account_number' => $request->account_number,
-            'bank_name' => $request->bank_name,
-            'bank_branch' => $request->bank_branch,
-            'city' => $request->city,
             'image' => $saveUrl,
             'created_at' => Carbon::now(),
         ]);
@@ -96,12 +88,6 @@ class CustomerRepository implements CustomerInterface
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'address' => $request->address,
-                'shopname' => $request->shopname,
-                'account_holder' => $request->account_holder,
-                'account_number' => $request->account_number,
-                'bank_name' => $request->bank_name,
-                'bank_branch' => $request->bank_branch,
-                'city' => $request->city,
                 'image' => $saveUrl,
                 'created_at' => Carbon::now(),
             ]);
@@ -111,12 +97,6 @@ class CustomerRepository implements CustomerInterface
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'address' => $request->address,
-                'shopname' => $request->shopname,
-                'account_holder' => $request->account_holder,
-                'account_number' => $request->account_number,
-                'bank_name' => $request->bank_name,
-                'bank_branch' => $request->bank_branch,
-                'city' => $request->city,
                 'created_at' => Carbon::now(),
             ]);
         }

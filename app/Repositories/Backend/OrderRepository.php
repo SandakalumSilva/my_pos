@@ -16,6 +16,7 @@ class OrderRepository implements OrderInterface
 
     public function finalInvoice($request)
     {
+        $validate = $request->validate(['pay' => 'required']);
         $data = array();
         $data['customer_id'] = $request->customer_id;
         $data['order_date'] = $request->order_date;
@@ -27,7 +28,7 @@ class OrderRepository implements OrderInterface
         $data['total'] = $request->total;
         $data['payment_status'] = $request->payment_status;
         $data['pay'] = $request->pay;
-        // $data['due'] = $request->due;
+        $data['due'] = $request->total - $request->pay;
         $data['created_at'] = Carbon::now();
 
         $order_id = Order::insertGetId($data);
@@ -42,6 +43,8 @@ class OrderRepository implements OrderInterface
             $pdata['total'] = $content->total;
 
             $insert = Orderdetails::insert($pdata);
+            Product::where('id', $content->id)
+                ->update(['product_store' => DB::raw('product_store-' . $content->qty)]);
         }
 
         Cart::destroy();
@@ -72,11 +75,11 @@ class OrderRepository implements OrderInterface
     {
         $orderId = $request->id;
 
-        $product = Orderdetails::where('order_id', $orderId)->get();
-        foreach ($product as $item) {
-            Product::where('id', $item->product_id)
-                ->update(['product_store' => DB::raw('product_store-' . $item->quantity)]);
-        }
+        //$product = Orderdetails::where('order_id', $orderId)->get();
+        // foreach ($product as $item) {
+        //     Product::where('id', $item->product_id)
+        //         ->update(['product_store' => DB::raw('product_store-' . $item->quantity)]);
+        // }
 
         Order::findOrFail($orderId)->update(['order_status' => 'complete']);
 
@@ -110,6 +113,44 @@ class OrderRepository implements OrderInterface
             'tempDir' => public_path(),
             'chroot' => public_path(),
         ]);
-        return $pdf->download($order->invoice_no.'.pdf');
+        return $pdf->download($order->invoice_no . '.pdf');
+    }
+
+    public function pendingDue()
+    {
+        $alldue = Order::where('due', '>', '0')->orderBy('id', 'DESC')->get();
+        return view('backend.order.pending_due', compact('alldue'));
+    }
+
+    public function orderDueAjax($id)
+    {
+        $order = Order::findOrFail($id);
+        return response()->json($order);
+    }
+
+    public function updateDue($request)
+    {
+        $order_id = $request->id;
+        $due_amount = $request->due;
+        $pay_amount = $request->pay;
+
+        $allOrder = Order::findOrFail($order_id);
+        $mainDue = $allOrder->due;
+        $mainpay = $allOrder->pay;
+
+        $paid_due = $mainDue - $due_amount;
+        $paid_pay = $mainpay + $due_amount;
+        // dd($allOrder);
+        Order::findOrFail($order_id)->update([
+            'due' => $paid_due,
+            'pay' => $paid_pay,
+        ]);
+
+        $notification = array(
+            'message' => 'Due Amount Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('pending.due')->with($notification);
     }
 }

@@ -103,24 +103,10 @@
                                             </div>
                                         </div>
 
-
-
-
-
-
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="firstname" class="form-label">Buying Date </label>
                                                 <input type="date" name="buying_date" class="form-control ">
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label">Expire Date </label>
-                                                <input type="date" name="expire_date" class="form-control ">
 
                                             </div>
                                         </div>
@@ -149,7 +135,7 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group mb-3">
-                                                <label for="example-fileinput" class="form-label">Customer Image</label>
+                                                <label for="example-fileinput" class="form-label">Image</label>
                                                 <input type="file" name="product_image" id="image"
                                                     class="form-control">
 
